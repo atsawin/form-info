@@ -1,0 +1,17 @@
+body {
+  background: #ffffff;
+}
+table.form-info {
+  border: 1px solid #000000;
+  border-collapse: collapse;
+}
+table.form-info th, table.form-info td {
+  border: 1px solid #000000;
+  padding: 1px 2px;
+}
+table.form-info .form {
+  background: #ffffcc;
+}
+table.form-info tr:nth-child(even) {
+  background: #f2f2f2;
+}

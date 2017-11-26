@@ -1,0 +1,18 @@
+{
+  "description": "Adds a form information panel to the developer tools.",
+  "manifest_version": 2,
+  "name": "form-info",
+  "version": "0.1.0-alpha",
+  "author": "Atsawin Chaowanakritsanakul",
+  "homepage_url": "https://github.com/atsawin/form-info",
+  "icons": {
+    "48": "icons/form48.png"
+  },
+  "background": {
+    "scripts": ["background_scripts/background.js"]
+  },
+  "permissions": [
+    "<all_urls>"
+  ],
+  "devtools_page": "devtools/devtools-page.html"
+}
