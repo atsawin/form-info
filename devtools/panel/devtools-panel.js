@@ -8,7 +8,7 @@ function refresh() {
   }).then((response) => {
     var ret = '<table class="form-info"><thead><tr><th>Label</th><th>Name</th><th>Type</th><th>Checked</th><th>Value</th></tr></thead><tbody>';
     response.forEach(function(form) {
-      ret += '<tr class="form"><td colspan="5">' + form.method + ': ' + form.action + '</td></tr>';
+      ret += '<tr class="form"><td colspan="5">' + form.name + ': ' + form.method + ': ' + form.action + '</td></tr>';
       form.input.forEach(function(item) {
         ret += '<tr><td>' + item.label + '</td><td>' + item.name + '</td><td>' + item.type + '</td><td>' + (item.checked ? 'Yes' : '') + '</td><td>' + item.value + '</td></tr>';
       });

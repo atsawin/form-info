@@ -1,17 +1,49 @@
 body {
   background: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+div#buttonbar {
+  background: #f9f9fa;
+  padding: 3px 9px 4px 9px;
+  border-bottom: 1px solid #e0e0e1;
+}
+div#buttonbar button {
+  background: #ededf0;
+  border: 0;
+  border-radius: 2px;
+  padding: 1px 6px;
+}
+div#buttonbar button:hover {
+  background: #dddfe2;
+}
+div#result {
 }
 table.form-info {
-  border: 1px solid #000000;
+  border: 0;
   border-collapse: collapse;
+  width: 100%;
 }
-table.form-info th, table.form-info td {
-  border: 1px solid #000000;
-  padding: 1px 2px;
+table.form-info thead tr {
+  background: #f9f9fa;
 }
-table.form-info .form {
+table.form-info th {
+  border-left: 1px solid #e0e0e1;
+  font-weight: normal;
+  padding: 2px 4px;
+}
+table.form-info th:first-child {
+  border-left: 0;
+}
+table.form-info tbody tr:hover {
+  background: #f0f9fe;
+}
+table.form-info td {
+  padding: 2px 4px;
+}
+table.form-info tr.form {
   background: #ffffcc;
 }
-table.form-info tr:nth-child(even) {
+table.form-info tr:nth-child(even):not(.form):not(:hover) {
   background: #f2f2f2;
 }
