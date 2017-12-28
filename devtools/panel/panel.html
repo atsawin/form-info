@@ -5,10 +5,33 @@
   <link rel="stylesheet" href="devtools-panel.css"/>
 </head>
 <body>
-  <div id="buttonbar">
-    <button id="button_message">Refresh</button>
+  <template id="form-row">
+    <tr class="form"><td colspan="5"></td></tr>
+  </template>
+  <template id="input-row">
+    <tr class="input"><td></td><td></td><td></td><td></td><td></td></tr>
+  </template>
+  <div id="header">
+    <div id="buttonbar">
+      <button id="button_message">Refresh</button>
+    </div>
+    <div id="tablehead">
+      <table class="form-info">
+        <thead>
+          <tr id="table-head"><th>Label</th><th>Name</th><th>Type</th><th>Checked</th><th>Value</th></tr>
+        </thead>
+      </table>
+    </div>
   </div>
-  <div id="result"></div>
+  <div id="result">
+    <table id="table-body" class="form-info">
+      <thead>
+        <tr id="table-head"><th>Label</th><th>Name</th><th>Type</th><th>Checked</th><th>Value</th></tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
   <script src="devtools-panel.js"></script>
 </body>
 </html>

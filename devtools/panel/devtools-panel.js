@@ -1,69 +1,62 @@
-/**
-When the user clicks the 'message' button,
-send a message to the background script.
-*/
+var resizeTimeout;
+
 function refresh() {
   browser.runtime.sendMessage({
     tabId: browser.devtools.inspectedWindow.tabId
   }).then((response) => {
-    var tableElm = document.createElement('table');
-    tableElm.className = 'form-info';
-    var tableHeadElm = document.createElement('thead');
-    var tableBodyElm = document.createElement('tbody');
-    var tableRowElm = document.createElement('tr');
-    var tableCell = document.createElement('th');
-    tableCell.textContent = 'Label';
-    tableRowElm.appendChild(tableCell);
-    tableCell = document.createElement('th');
-    tableCell.textContent = 'Name';
-    tableRowElm.appendChild(tableCell);
-    tableCell = document.createElement('th');
-    tableCell.textContent = 'Type';
-    tableRowElm.appendChild(tableCell);
-    tableCell = document.createElement('th');
-    tableCell.textContent = 'Checked';
-    tableRowElm.appendChild(tableCell);
-    tableCell = document.createElement('th');
-    tableCell.textContent = 'Value';
-    tableRowElm.appendChild(tableCell);
-    tableHeadElm.appendChild(tableRowElm);
-    tableElm.appendChild(tableHeadElm);
+    var formRow = document.querySelector('#form-row').content;
+    var inputRow = document.querySelector('#input-row').content;
+    var tbody = document.querySelector('#table-body tbody');
+    while (tbody.firstChild) {
+      tbody.removeChild(tbody.firstChild);
+    }
     response.forEach(function(form) {
-      tableRowElm = document.createElement('tr');
-      tableRowElm.className = 'form';
-      tableCell = document.createElement('td');
-      tableCell.setAttribute('colspan', '5');
-      tableCell.textContent = 'Name: ' + form.name + ', Method: ' + form.method + ', URL: ' + form.action;
-      tableRowElm.appendChild(tableCell);
-      tableBodyElm.appendChild(tableRowElm);
+      var td = formRow.querySelectorAll('td');
+      td[0].textContent = 'Name: ' + form.name + ', Method: ' + form.method + ', URL: ' + form.action;
+      tbody.appendChild(document.importNode(formRow, true));
       form.input.forEach(function(item) {
-        tableRowElm = document.createElement('tr');
-        tableCell = document.createElement('td');
-        tableCell.textContent = item.label;
-        tableRowElm.appendChild(tableCell);
-        tableCell = document.createElement('td');
-        tableCell.textContent = item.name;
-        tableRowElm.appendChild(tableCell);
-        tableCell = document.createElement('td');
-        tableCell.textContent = item.type;
-        tableRowElm.appendChild(tableCell);
-        tableCell = document.createElement('td');
-        tableCell.textContent = item.checked ? 'Yes' : '';
-        tableRowElm.appendChild(tableCell);
-        tableCell = document.createElement('td');
-        tableCell.textContent = item.value;
-        tableRowElm.appendChild(tableCell);
-        tableBodyElm.appendChild(tableRowElm);
+        var td = inputRow.querySelectorAll('td');
+        td[0].textContent = item.label;
+        td[1].textContent = item.name;
+        td[2].textContent = item.type;
+        td[3].textContent = item.checked ? 'Yes' : ' ';
+        td[4].textContent = item.value;
+        tbody.appendChild(document.importNode(inputRow, true));
       });
     });
-    tableElm.appendChild(tableBodyElm);
-    var resultElm = document.getElementById('result');
-    while (resultElm.firstChild) {
-      resultElm.removeChild(resultElm.firstChild);
-    }
-    resultElm.appendChild(tableElm);
   });
+  firstAdjustHeadWidth();
+}
+
+function firstAdjustHeadWidth() {
+  setTimeout(function() {
+    if (!adjustHeadWidth()) {
+      firstAdjustHeadWidth();
+    }
+  }, 10);
+}
+
+function adjustHeadWidth() {
+  var headTr = document.querySelector('#table-head');
+  var bodyTr = document.querySelector('.input');
+  if (bodyTr) {
+    for (cnt2 = 0; cnt2 < bodyTr.childNodes.length; cnt2++) {
+      headTr.childNodes[cnt2].style.width = (bodyTr.childNodes[cnt2].clientWidth - 9) + 'px';
+    }
+    return true;
+  }
+  return false;
+}
+
+function resizeThrottler() {
+  if (!resizeTimeout) {
+    resizeTimeout = setTimeout(function() {
+      resizeTimeout = null;
+      adjustHeadWidth();
+    }, 66);
+  }
 }
 
 document.getElementById('button_message').addEventListener('click', refresh);
 browser.devtools.network.onNavigated.addListener(refresh);
+window.addEventListener("resize", resizeThrottler, false);

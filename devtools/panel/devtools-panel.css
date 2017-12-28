@@ -3,6 +3,9 @@ body {
   margin: 0;
   padding: 0;
 }
+div#header {
+  z-index: 1000;
+}
 div#buttonbar {
   background: #f9f9fa;
   padding: 3px 9px 4px 9px;
@@ -18,6 +21,16 @@ div#buttonbar button:hover {
   background: #dddfe2;
 }
 div#result {
+  overflow-x: auto;
+  top: 27px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  z-index: -1;
+}
+#tablehead table {
+  width: auto;
 }
 table.form-info {
   border: 0;
