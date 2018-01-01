@@ -11,6 +11,15 @@
   <template id="input-row">
     <tr class="input"><td></td><td></td><td></td><td></td><td></td></tr>
   </template>
+  <template id="checked-icon">
+    <img src="checked.png" title="checked" width="16" height="16" />
+  </template>
+  <template id="checked-radio-icon">
+    <img src="checked-radio.png" title="checked" width="16" height="16" />
+  </template>
+  <template id="disabled-icon">
+    <img src="disabled.png" title = "disabled" width="16" height="16" />
+  </template>
   <div id="header">
     <div id="buttonbar">
       <button id="button_message">Refresh</button>
@@ -18,7 +27,7 @@
     <div id="tablehead">
       <table class="form-info">
         <thead>
-          <tr id="table-head"><th>Label</th><th>Name</th><th>Type</th><th>Checked</th><th>Value</th></tr>
+          <tr id="table-head"><th>Label</th><th>Name</th><th>Type</th><th>Status</th><th>Value</th></tr>
         </thead>
       </table>
     </div>
@@ -26,7 +35,7 @@
   <div id="result">
     <table id="table-body" class="form-info">
       <thead>
-        <tr id="table-head"><th>Label</th><th>Name</th><th>Type</th><th>Checked</th><th>Value</th></tr>
+        <tr id="table-head"><th>Label</th><th>Name</th><th>Type</th><th>Status</th><th>Value</th></tr>
       </thead>
       <tbody>
       </tbody>

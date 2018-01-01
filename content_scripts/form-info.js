@@ -20,6 +20,7 @@ document.querySelectorAll('form').forEach(function(form) {
         label: label,
         type: item.type,
         checked: item.checked,
+        disabled: item.disabled,
         value: item.value
       });
     }

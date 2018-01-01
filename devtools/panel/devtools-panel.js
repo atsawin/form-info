@@ -6,6 +6,9 @@ function refresh() {
   }).then((response) => {
     var formRow = document.querySelector('#form-row').content;
     var inputRow = document.querySelector('#input-row').content;
+    var checkedIcon = document.querySelector('#checked-icon').content;
+    var checkedRadioIcon = document.querySelector('#checked-radio-icon').content;
+    var disabledIcon = document.querySelector('#disabled-icon').content;
     var tbody = document.querySelector('#table-body tbody');
     while (tbody.firstChild) {
       tbody.removeChild(tbody.firstChild);
@@ -19,7 +22,19 @@ function refresh() {
         td[0].textContent = item.label;
         td[1].textContent = item.name;
         td[2].textContent = item.type;
-        td[3].textContent = item.checked ? 'Yes' : ' ';
+        while (td[3].firstChild) {
+          td[3].removeChild(td[3].firstChild);
+        }
+        if (item.checked) {
+          if (item.type == 'radio') {
+            td[3].appendChild(document.importNode(checkedRadioIcon, true));
+          } else {
+            td[3].appendChild(document.importNode(checkedIcon, true));
+          }
+        }
+        if (item.disabled) {
+          td[3].appendChild(document.importNode(disabledIcon, true));
+        }
         td[4].textContent = item.value;
         tbody.appendChild(document.importNode(inputRow, true));
       });
