@@ -21,7 +21,8 @@ function refresh() {
         var td = inputRow.querySelectorAll('td');
         td[0].textContent = item.label;
         td[1].textContent = item.name;
-        td[2].textContent = item.type;
+        var td2 = td[2].firstChild;
+        td2.textContent = item.type;
         while (td[3].firstChild) {
           td[3].removeChild(td[3].firstChild);
         }

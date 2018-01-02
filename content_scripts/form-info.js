@@ -6,13 +6,20 @@ document.querySelectorAll('form').forEach(function(form) {
     method: form.method,
     input: []
   };
-  form.querySelectorAll('input, select').forEach(function(item) {
+  form.querySelectorAll('input, select, textarea').forEach(function(item) {
     if (item.name) {
       var label = '';
       if (item.id) {
         var labeldom = form.querySelector('label[for="' + item.id + '"]');
         if (labeldom) {
           label = labeldom.innerText;
+        } else {
+          labeldom = closest(item, function(el) {
+            return el.nodeName == 'LABEL';
+          });
+          if (labeldom) {
+            label = labeldom.innerText;
+          }
         }
       }
       formInfo.input.push({
@@ -28,3 +35,11 @@ document.querySelectorAll('form').forEach(function(form) {
   ret.push(formInfo);
 });
 ret;
+
+function closest (el, predicate) {
+  do {
+    if (predicate(el)) {
+      return el;
+    }
+  } while (el = el && el.parentNode);
+}
