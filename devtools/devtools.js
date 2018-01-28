@@ -15,8 +15,8 @@ Create a panel, and add listeners for panel show/hide events.
 */
 browser.devtools.panels.create(
   "Form Info",
-  "icons/form48.png",
-  "devtools/panel/panel.html"
+  "/icons/form48.png",
+  "/devtools/panel/panel.html"
 ).then((newPanel) => {
   newPanel.onShown.addListener(handleShown);
   newPanel.onHidden.addListener(handleHidden);
