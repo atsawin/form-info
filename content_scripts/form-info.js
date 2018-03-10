@@ -1,12 +1,13 @@
 var ret = [];
-document.querySelectorAll('form').forEach(function(form) {
+document.querySelectorAll('form').forEach(function(form, formidx) {
   var formInfo = {
+    formidx: formidx,
     name: form.name,
     action: form.action,
     method: form.method,
     input: []
   };
-  form.querySelectorAll('input, select, textarea').forEach(function(item) {
+  form.querySelectorAll('input, select, textarea').forEach(function(item, itemidx) {
     if (item.name) {
       var label = '';
       if (item.id) {
@@ -23,6 +24,7 @@ document.querySelectorAll('form').forEach(function(form) {
         }
       }
       formInfo.input.push({
+        itemidx: itemidx,
         name: item.name,
         label: label,
         type: item.type,

@@ -20,7 +20,11 @@ function refresh() {
       form.input.forEach(function(item) {
         var td = inputRow.querySelectorAll('td');
         td[0].textContent = item.label;
-        td[1].textContent = item.name;
+        var tdname = td[1].querySelector('span');
+        var tdimg = td[1].querySelector('img');
+        tdname.textContent = item.name;
+        tdimg.dataset.formidx = form.formidx;
+        tdimg.dataset.itemidx = item.itemidx;
         var td2 = td[2].firstChild;
         td2.textContent = item.type;
         while (td[3].firstChild) {
@@ -38,6 +42,12 @@ function refresh() {
         }
         td[4].textContent = item.value;
         tbody.appendChild(document.importNode(inputRow, true));
+      });
+    });
+    document.querySelectorAll('img.inspect').forEach(function(item) {
+      item.addEventListener('click', function(event) {
+        browser.devtools.inspectedWindow.eval("var form = document.querySelectorAll('form')[" + item.dataset.formidx + "]; " +
+            "inspect(form.querySelectorAll('input, select, textarea')[" + item.dataset.itemidx + "])");
       });
     });
   });

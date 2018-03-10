@@ -60,3 +60,6 @@ table.form-info tr.form {
 table.form-info tr:nth-child(even):not(.form):not(:hover) {
   background: #f2f2f2;
 }
+table.form-info img.inspect {
+  cursor: pointer;
+}
