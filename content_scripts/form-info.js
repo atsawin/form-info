@@ -7,7 +7,7 @@ document.querySelectorAll('form').forEach(function(form, formidx) {
     method: form.method,
     input: []
   };
-  form.querySelectorAll('input, select, textarea').forEach(function(item, itemidx) {
+  form.querySelectorAll('input, select, textarea, button').forEach(function(item, itemidx) {
     if (item.name) {
       var label = '';
       if (item.id) {
