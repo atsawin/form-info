@@ -10,6 +10,7 @@ document.querySelectorAll('form').forEach(function(form, formidx) {
   form.querySelectorAll('input, select, textarea, button').forEach(function(item, itemidx) {
     if (item.name) {
       var label = '';
+      var value = item.value;
       if (item.id) {
         var labeldom = form.querySelector('label[for="' + item.id + '"]');
         if (labeldom) {
@@ -23,6 +24,9 @@ document.querySelectorAll('form').forEach(function(form, formidx) {
           }
         }
       }
+      if (item.type == 'select-multiple') {
+        value = Array.from(item.options).filter(option => option.selected).map(option => option.value).join(', ');
+      }
       formInfo.input.push({
         itemidx: itemidx,
         name: item.name,
@@ -30,7 +34,7 @@ document.querySelectorAll('form').forEach(function(form, formidx) {
         type: item.type,
         checked: item.checked,
         disabled: item.disabled,
-        value: item.value
+        value: value
       });
     }
   });
